@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>C# Array Copy Methods - Cheat Sheet</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: white;
+            color: #333;
+        }
+
+        .method-box {
+            border: 1px solid #ccc;
+            margin: 15px 0;
+            padding: 15px;
+            page-break-inside: avoid;
+        }
+
+        .method-title {
+            color: #2B579A;
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        pre {
+            background-color: #f5f5f5;
+            padding: 10px;
+            border-left: 3px solid #6c757d;
+            overflow-x: auto;
+            font-size: 14px;
+        }
+
+        .note {
+            background-color: #fff3cd;
+            padding: 10px;
+            margin: 10px 0;
+            border-left: 4px solid #ffc107;
+        }
+
+        table {
+            width: 100%;
+            margin: 10px 0;
+            border-collapse: collapse;
+        }
+
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+            vertical-align: top;
+        }
+
+        .good {
+            color: #28a745;
+        }
+        
+        .bad {
+            color: #dc3545;
+        }
+    </style>
+</head>
+<body>
+    <h1>C# Array Copy Methods</h1>
+
+    <!-- Method 1: Array.Copy -->
+    <div class="method-box">
+        <h2 class="method-title">1. Array.Copy()</h2>
+        <pre><code>int[] dest = new int[source.Length];
+Array.Copy(source, dest, source.Length);</code></pre>
+        <table>
+            <tr>
+                <td class="good">✓ Modifies existing array</td>
+                <td class="good">✓ Fast for large arrays</td>
+                <td class="bad">✗ Requires pre-initialized array</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Method 2: Clone -->
+    <div class="method-box">
+        <h2 class="method-title">2. Clone()</h2>
+        <pre><code>int[] clone = (int[])source.Clone();</code></pre>
+        <table>
+            <tr>
+                <td class="good">✓ Creates new array</td>
+                <td class="bad">✗ 1D arrays only</td>
+                <td class="bad">✗ Returns object</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Method 3: CopyTo -->
+    <div class="method-box">
+        <h2 class="method-title">3. CopyTo()</h2>
+        <pre><code>int[] dest = new int[source.Length];
+source.CopyTo(dest, 0);</code></pre>
+        <table>
+            <tr>
+                <td class="good">✓ Instance method</td>
+                <td class="good">✓ Specify start index</td>
+                <td class="bad">✗ Needs initialized array</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Method 4: LINQ ToArray -->
+    <div class="method-box">
+        <h2 class="method-title">4. LINQ ToArray()</h2>
+        <pre><code>using System.Linq;
+int[] copy = source.ToArray();</code></pre>
+        <table>
+            <tr>
+                <td class="good">✓ Concise syntax</td>
+                <td class="bad">✗ LINQ overhead</td>
+                <td class="good">✓ Returns new array</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Method 5: Deep Copy -->
+    <div class="method-box">
+        <h2 class="method-title">5. Deep Copy</h2>
+        <pre><code>// For reference types
+Person[] deepCopy = people
+    .Select(p => new Person { Name = p.Name })
+    .ToArray();</code></pre>
+        <table>
+            <tr>
+                <td class="good">✓ Copies objects</td>
+                <td class="bad">✗ Manual implementation</td>
+                <td class="good">✓ Isolated copies</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="note">
+        <h3>When to Use:</h3>
+        <p>• Value types → Any shallow copy<br>
+           • Reference types → Deep copy<br>
+           • Simple needs → Clone()/ToArray()<br>
+           • Large data → Array.Copy</p>
+    </div>
+</body>
+</html>
