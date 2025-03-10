@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+
+        .code-block {
+            background-color: #f5f6fa;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Courier New', monospace;
+        }
+
+        .comparison-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+
+        .comparison-table th, 
+        .comparison-table td {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            text-align: left;
+        }
+
+        .comparison-table th {
+            background-color: #3498db;
+            color: white;
+        }
+
+        .comparison-table tr:nth-child(even) {
+            background-color: #ecf0f1;
+        }
+
+        .use-case {
+            background-color: #e8f6f3;
+            padding: 15px;
+            border-left: 4px solid #16a085;
+            margin: 15px 0;
+        }
+
+        .checkmark {
+            color: #27ae60;
+            margin-right: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Jagged Arrays in C#</h1>
+
+    <h2>What is a Jagged Array?</h2>
+    <p>A jagged array in C# is an array of arrays, meaning each row can have a different number of elements.</p>
+
+    <h2>Declaring a Jagged Array</h2>
+    <div class="code-block">
+        int[][] jaggedArray = new int[3][]; // 3 rows with undefined columns
+    </div>
+
+    <h2>Initializing a Jagged Array</h2>
+    <div class="code-block">
+        jaggedArray[0] = new int[] { 1, 2, 3 };<br>
+        jaggedArray[1] = new int[] { 4, 5 };<br>
+        jaggedArray[2] = new int[] { 6, 7, 8, 9 };
+    </div>
+
+    <h2>Accessing Elements</h2>
+    <div class="code-block">
+        Console.WriteLine(jaggedArray[0][1]); // Output: 2<br>
+        Console.WriteLine(jaggedArray[2][3]); // Output: 9
+    </div>
+
+    <h2>Looping Through</h2>
+    <h3>for Loop:</h3>
+    <div class="code-block">
+        for (int i = 0; i < jaggedArray.Length; i++) {<br>
+        &nbsp;&nbsp;for (int j = 0; j < jaggedArray[i].Length; j++) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Console.Write(jaggedArray[i][j] + " ");<br>
+        &nbsp;&nbsp;}<br>
+        }
+    </div>
+
+    <h3>foreach Loop:</h3>
+    <div class="code-block">
+        foreach (int[] row in jaggedArray) {<br>
+        &nbsp;&nbsp;foreach (int num in row) {<br>
+        &nbsp;&nbsp;&nbsp;&nbsp;Console.Write(num + " ");<br>
+        &nbsp;&nbsp;}<br>
+        }
+    </div>
+
+    <h2>Comparison</h2>
+    <table class="comparison-table">
+        <tr>
+            <th>Feature</th>
+            <th>Jagged Array</th>
+            <th>Multidimensional Array</th>
+        </tr>
+        <tr>
+            <td>Memory Usage</td>
+            <td>More efficient</td>
+            <td>Less efficient</td>
+        </tr>
+        <tr>
+            <td>Row Sizes</td>
+            <td>Variable</td>
+            <td>Fixed</td>
+        </tr>
+        <tr>
+            <td>Syntax</td>
+            <td>arr[0][1]</td>
+            <td>arr[0,1]</td>
+        </tr>
+    </table>
+
+    <h2>Multidimensional Array Example</h2>
+    <div class="code-block">
+        int[,] multiArray = { { 1, 2 }, { 3, 4 }, { 5, 6 } };<br>
+        Console.WriteLine(multiArray[1, 0]); // Output: 3
+    </div>
+
+    <h2>When to Use Jagged Arrays</h2>
+    <div class="use-case">
+        <div><span class="checkmark">✓</span> When rows have varying lengths</div>
+        <div><span class="checkmark">✓</span> When memory efficiency is important</div>
+        <div><span class="checkmark">✓</span> For irregular datasets</div>
+    </div>
+</body>
+</html>
