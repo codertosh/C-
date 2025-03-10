@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 0 20px;
+            background-color: #f5f5f5;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 0 15px rgba(0,0,0,0.1);
+        }
+
+        h1 {
+            color: #2c3e50;
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+
+        h2 {
+            color: #34495e;
+            margin-top: 25px;
+        }
+
+        .code-block {
+            background: #2d2d2d;
+            color: #e0e0e0;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+            font-family: 'Consolas', monospace;
+            white-space: pre-wrap;
+        }
+
+        .warning {
+            color: #c0392b;
+            font-weight: bold;
+        }
+
+        .checklist {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .checklist li::before {
+            content: "✅";
+            margin-right: 10px;
+        }
+
+        .key-takeaway {
+            background: #e8f4f8;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            margin: 20px 0;
+        }
+
+        .emphasize {
+            color: #27ae60;
+            font-weight: bold;
+        }
+
+        .error-example {
+            border: 2px solid #c0392b;
+            background: #f9ebeb;
+            padding: 15px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Checked Arrays in C# - Quick Notes</h1>
+
+        <h2>1. What is a Checked Context?</h2>
+        <ul>
+            <li>In C#, the <span class="emphasize">checked</span> keyword detects integer overflow</li>
+            <li>Not array-specific but crucial for array calculations</li>
+        </ul>
+
+        <h2>2. Syntax of checked in Arrays</h2>
+        <div class="code-block">
+int[] numbers = { int.MaxValue, 1 };
+
+try
+{
+    int result = checked(numbers[0] + numbers[1]); // Throws OverflowException
+    Console.WriteLine(result);
+}
+catch (OverflowException ex)
+{
+    Console.WriteLine("Overflow detected: " + ex.Message);
+}
+        </div>
+        <p class="emphasize">✅ Ensures exception on overflow</p>
+
+        <h2>3. Using unchecked to Allow Overflow</h2>
+        <div class="code-block">
+int result = unchecked(int.MaxValue + 1); // Wraps to negative value
+        </div>
+
+        <h2>4. Checked Block for Multiple Operations</h2>
+        <div class="code-block">
+checked
+{
+    int sum = numbers[0] + numbers[1]; // Throws exception if overflow
+    Console.WriteLine(sum);
+}
+        </div>
+
+        <h2>5. Bounds Checking in Arrays</h2>
+        <div class="error-example">
+            <div class="code-block">
+int[] arr = { 1, 2, 3 };
+Console.WriteLine(arr[5]); // ❌ IndexOutOfRangeException
+            </div>
+            <p class="warning">C# automatically checks array bounds!</p>
+        </div>
+
+        <h2>6. When to Use Checked Context?</h2>
+        <ul class="checklist">
+            <li>Large number operations in arrays</li>
+            <li>Financial/scientific calculations</li>
+            <li>Prevent silent overflow errors</li>
+        </ul>
+
+        <div class="key-takeaway">
+            <h3>7. Key Takeaways 🚀</h3>
+            <ul>
+                <li><span class="emphasize">checked</span> throws OverflowException</li>
+                <li><span class="emphasize">unchecked</span> allows overflow (default)</li>
+                <li>Array bounds automatically checked</li>
+            </ul>
+            <p style="color: #3498db; margin-top: 10px;">
+                Use checked for safe numeric operations in arrays!
+            </p>
+        </div>
+    </div>
+</body>
+</html>
