@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>C# Checked & Try-Catch with Arrays</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            line-height: 1.6;
+            margin: 2rem;
+            background-color: #f0f4f8;
+        }
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        h2 {
+            color: #2c3e50;
+            border-bottom: 2px solid #3498db;
+            padding-bottom: 0.5rem;
+        }
+
+        h3 {
+            color: #3498db;
+            margin-top: 1.5rem;
+        }
+
+        .code-block {
+            background: #2c3e50;
+            color: #ecf0f1;
+            padding: 1rem;
+            border-radius: 5px;
+            margin: 1rem 0;
+            overflow-x: auto;
+        }
+
+        .warning {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        .tip {
+            background: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 1rem;
+            margin: 1rem 0;
+        }
+
+        ul {
+            padding-left: 1.5rem;
+        }
+
+        li {
+            margin: 0.5rem 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>Checked Arrays & Try-Catch in C#</h2>
+
+        <div class="tip">
+            <h3>1. checked Keyword</h3>
+            <p><strong>Purpose:</strong> Enables overflow checking for integer operations</p>
+            <ul>
+                <li>Default: Overflow ignored (unchecked)</li>
+                <li>With <code>checked</code>: Throws OverflowException</li>
+            </ul>
+            
+            <h4>Array Use Cases:</h4>
+            <ul>
+                <li>Index calculations (a + b overflow)</li>
+                <li>Array size allocation validation</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <h3>2. try-catch Blocks</h3>
+            <p><strong>Purpose:</strong> Handle exceptions gracefully</p>
+            <ul>
+                <li>Early error detection</li>
+                <li>Targeted exception handling</li>
+            </ul>
+        </div>
+
+        <h3>Example Workflow</h3>
+        <div class="code-block">
+            <pre><code>try {
+    checked {
+        int a = int.MaxValue;
+        int b = 1;
+        int index = a + b; // Throws OverflowException
+        
+        int[] array = new int[10];
+        int value = array[index];
+    }
+}
+catch (OverflowException ex) {
+    Console.WriteLine("Overflow: " + ex.Message);
+}
+catch (IndexOutOfRangeException ex) {
+    Console.WriteLine("Invalid index: " + ex.Message);
+}</code></pre>
+        </div>
+
+        <div class="warning">
+            <h3>Key Differences</h3>
+            <ul>
+                <li>Without <code>checked</code>: Silent wrap → IndexOutOfRangeException</li>
+                <li>With <code>checked</code>: Immediate OverflowException</li>
+            </ul>
+        </div>
+
+        <div class="tip">
+            <h3>When to Use</h3>
+            <ul>
+                <li>Large arrays near int.MaxValue</li>
+                <li>Complex index calculations</li>
+                <li>User input-dependent sizes</li>
+                <li>Critical systems needing robustness</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
