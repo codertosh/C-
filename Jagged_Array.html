@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -90,15 +91,22 @@
     <h2>Looping Through</h2>
     <h3>for Loop:</h3>
     <div class="code-block">
-        for (int i = 0; i < jaggedArray.Length; i++) {<br>
-        &nbsp;&nbsp;for (int j = 0; j < jaggedArray[i].Length; j++) {<br>
+       <p style= "color: red;">// #1</p>
+        for (int i = 0; i < jaggedArray.Length; i++) {<br>  
+ 
+        &nbsp;&nbsp;  <p style= "color: red;">// #2</p>for (int j = 0; j < jaggedArray[i].Length; j++) {<br>
         &nbsp;&nbsp;&nbsp;&nbsp;Console.Write(jaggedArray[i][j] + " ");<br>
         &nbsp;&nbsp;}<br>
 
-            <p><ul> <li>Outer loop (i) runs from 0 to jaggedArray.Length - 1 (number of rows).</li> <br>
-               <li>Inner loop (j) runs from 0 to jaggedArray[i].Length - 1 (number of elements in the current row).</li></ul></p>
+         <p style="color:blue;" >//#1. jaggedArray is an array of arrays, so Length returns the number of rows (or sub-arrays) in the jagged array.</p>
+            <p style="color:blueviolet;" >//#2. jaggedArray[i] is a single array (row), Length returns the number of elements in that row.</p>
         }
+
+        
     </div>
+
+    <p><ul> <li>Outer loop (i) runs from 0 to jaggedArray.Length - 1 (number of rows).</li> <br>
+               <li>Inner loop (j) runs from 0 to jaggedArray[i].Length - 1 (number of elements in the current row).</li></ul></p>
 
     <h3>foreach Loop:</h3>
     <div class="code-block">
